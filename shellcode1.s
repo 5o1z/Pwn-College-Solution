@@ -1,5 +1,6 @@
 .global _start
 _start:
+.intel_syntax noprefix
         mov rax, 0x69
         mov rdi, 0
         syscall
