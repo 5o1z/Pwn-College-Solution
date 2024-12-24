@@ -1,12 +1,11 @@
-from pwn import *
-
-p = process('/challenge/./run')
-
 # if x is even then
 #   y = 1
 # else
 #   y = 0
 # --> Use AND to take low bit (0 is even & 1 is odd) --> Use XOR with 1 (to change 0 to 1 & 1 to 0)
+from pwn import *
+p = process('/challenge/./run')
+
 code = asm('''
     and rdi, 1
     xor rdi, 1

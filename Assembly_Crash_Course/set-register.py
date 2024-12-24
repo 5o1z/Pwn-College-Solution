@@ -1,3 +1,6 @@
+# In this level, you will work with registers! Please set the following:
+
+# rdi = 0x1337
 from pwn import *
 
 p = process(['/challenge/./run'])

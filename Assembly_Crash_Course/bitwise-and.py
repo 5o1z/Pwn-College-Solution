@@ -1,3 +1,4 @@
+# Set rax to the value of (rdi AND rsi)
 from pwn import *
 
 p = process('/challenge/./run')

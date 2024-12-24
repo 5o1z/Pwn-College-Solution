@@ -1,4 +1,16 @@
-# Assume each dereferenced value is a signed dword. This means the values can start as a negative value at each memory position.
+# Using the above knowledge, implement the following:
+# if [x] is 0x7f454c46:
+#     y = [x+4] + [x+8] + [x+12]
+# else if [x] is 0x00005A4D:
+#     y = [x+4] - [x+8] - [x+12]
+# else:
+#     y = [x+4] * [x+8] * [x+12]
+
+# Where:
+# x = rdi, y = rax.
+
+# Assume each dereferenced value is a signed dword.
+# This means the values can start as a negative value at each memory position.
 
 from pwn import *
 
